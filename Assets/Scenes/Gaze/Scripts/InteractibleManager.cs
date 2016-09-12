@@ -18,8 +18,6 @@ public class InteractibleManager : Singleton<InteractibleManager>
 
     void Update()
     {
-        /* TODO: DEVELOPER CODING EXERCISE 2.c */
-
         oldFocusedGameObject = FocusedGameObject;
 
         if (GazeManager.Instance.Hit)
@@ -28,7 +26,7 @@ public class InteractibleManager : Singleton<InteractibleManager>
             if (hitInfo.collider != null)
             {
                 // 2.c: Assign the hitInfo's collider gameObject to the FocusedGameObject.
-                
+                FocusedGameObject = hitInfo.collider.gameObject;
             }
             else
             {
@@ -49,7 +47,7 @@ public class InteractibleManager : Singleton<InteractibleManager>
                 if (FocusedGameObject.GetComponent<Interactible>() != null)
                 {
                     // 2.c: Send a GazeEntered message to the FocusedGameObject.
-                    
+                    FocusedGameObject.SendMessage("GazeEntered");
                 }
             }
         }
@@ -62,7 +60,7 @@ public class InteractibleManager : Singleton<InteractibleManager>
             if (oldFocusedGameObject.GetComponent<Interactible>() != null)
             {
                 // 2.c: Send a GazeExited message to the oldFocusedGameObject.
-                
+                oldFocusedGameObject.SendMessage("GazeExited");
             }
         }
     }
